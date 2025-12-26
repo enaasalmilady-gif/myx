@@ -1,0 +1,2264 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@200..800&display=swap');
+/* Basic Rest */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* خلفية سوداء أساسية لمنع الوميض الأبيض */
+   
+   font-family: 'Times New Roman', Times, serif;
+background-position: 0% 50%;
+      width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+
+
+
+.back-video {
+    
+    position: fixed;
+opacity: 0.1;
+    top: 0;
+right: 0;
+    bottom: 0;
+  min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* animation calass */
+.appear{
+     animation: appear  linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+}
+
+@keyframes appear {
+    from { opacity: 0; 
+    scale: 0.5;}
+    to { opacity: 0.5;
+    scale: 1;}
+    
+}
+
+.back-ani-color{
+   
+position: relative;
+top: 100px;
+  left: 150px;
+
+    box-shadow: #631414 0px 0px 20px ;
+    border: 5px solid rgba(228, 0, 0, 0.596);
+      width: 900px;
+    height: 400px;
+    background: linear-gradient(-45deg,#631414, #000000, #631414, #000000);
+    background-size: 400% 400%;
+    animation: back-ani-color 10s infinite  ease-in-out;
+   border-radius: 10px;
+    text-align: center;
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+
+}
+  @keyframes back-ani-color {
+   0% { background-position: 0% 50%; }
+    50% {background-position: 100% 50%; }
+    100% { background-position: 0% 50%;}
+  }
+
+.login-text {
+    font-size: 60px;
+  font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-weight: bolder;
+    text-shadow: 2px 2px 4px rgba(177, 13, 13, 0.7);
+}
+.btn-login {
+    background: rgba(255, 0, 0, 0.2); /* خلفية حمراء زجاجية */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 200px;
+    height: 50px;
+ 
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.btn-login a {
+    color: white !important;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+
+
+/* Layout Container */
+.website-layout {
+background: linear-gradient(to left, rgba(99, 20, 20, 0.8), rgba(0, 0, 0, 0.7));
+    z-index: 1;
+   width: 100%;
+    display: grid;
+   
+   min-height: 100vh;
+
+    /* Define Columns: Sidebar width (e.g., 200px) and the rest (1fr) */
+    grid-template-columns: 80px 1fr ;
+
+    /* Define Rows: Header height, Main content (auto/fill), Footer height */
+    grid-template-rows: auto;
+
+    /* Define Areas by name */
+    grid-template-areas:
+        "sidebar header "
+        " sidebar content "
+        "sidebar content "
+        "sidebar footer  ";
+}
+.logo-bookmark-nave {
+    position: absolute; /* لجعل شريط التنقل يطفو فوق السلايدر */
+    top: 0;
+    right: 0;
+    
+    width: 100%;
+    height: 80px; /* ارتفاع شريط التنقل فقط */
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start; /* دفع العناصر لليمين في نظام RTL */
+    padding: 0 150px;
+    z-index: 1000; /* قيمة عالية جداً ليكون فوق الصور */
+    direction: rtl;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.514), transparent); /* تضليل خفيف خلف الروابط */
+}
+.logo i {
+    color: #e50914;
+    margin: 0 2px;
+    font-size: 24px;
+  
+    text-shadow: 0 0 15px rgba(229, 9, 20, 0.8), 0 0 30px rgba(229, 9, 20, 0.4);
+}
+
+
+
+.logo h1 {
+    direction: ltr;
+   color: #ffffff;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.bookmarks {
+
+    display: flex;
+    gap: 30px;
+    margin-right: 20px; /* مسافة بين اللوجو والروابط */
+}
+.hnav {
+    margin: 10px;
+    color: white !important;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.9); /* لضمان وضوح النص فوق الصور */
+}
+
+
+
+/* Assign Classes to Grid Areas */
+.site-header {
+    grid-area: header;
+    background-color: rgba(51, 51, 51, 0.5); /* جعلته شفافاً قليلاً ليشبه الصورة */
+    color: white;
+   
+    display: flex;
+    justify-content: flex-start; /* دفع العناصر لليمن (في نظام RTL) */
+    align-items: center;
+    direction: rtl; /* هذا السطر سيجعل اليمين هو البداية */
+}
+
+/* --- Base Sidebar (Desktop) with Glass Effect --- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0; 
+    width: 80px;
+    height: 100vh;
+    
+    /* 1. تغيير لون الخلفية ليكون شفافاً (RGBA) */
+    background-color:  #631414; 
+    
+    /* 2. إضافة تأثير الغبش (Blur) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* لدعم متصفح Safari */
+    
+    /* 3. إضافة حدود خفيفة لتعزيز مظهر الزجاج */
+    border-left: 1px solid rgba(255, 255, 255, 0.1); 
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+    transition: all 0.4s ease;
+    z-index: 1000;
+    direction: rtl;
+    
+    /* 4. إضافة ظل خفيف لإعطاء عمق */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    color: white;
+    text-decoration: none;
+    position: relative;
+}
+
+/* Hide text labels on Desktop slim bar */
+.sidebar-nav span {
+    display: none;
+}
+
+/* --- THE ICON HOVER EFFECT --- */
+.sidebar-nav a i {
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-nav a:hover i {
+    color: #ffffff; /* Glow Red */
+    transform: scale(1.3);
+    text-shadow: 0 0 15px #ff0000;
+}
+
+/* Hide Mobile Button on Desktop */
+.menu-toggle {
+    display: none;
+}
+
+
+.movie-content {
+    margin-top: 100px;
+    grid-area: content;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+
+}
+
+.site-footer {
+    margin-top: 200px;
+    position: sticky;
+  margin-right: 30px;
+
+    height: 400px;
+    width: 100%; /* اجعلها 100% بدلاً من 1400px */
+    max-width: calc(100vw - 150px); /* لضمان عدم خروجها عن حدود الشاشة بسبب السايدبار */
+    box-sizing: border-box;
+   
+    grid-area: footer;
+    
+    /* --- بداية تأثير الزجاج --- */
+    background-color: #631414; /* لون أحمر غامق شفاف */
+    backdrop-filter: blur(12px); /* درجة الغبش للخلفية */
+    -webkit-backdrop-filter: blur(12px); /* لدعم متصفحات Safari */
+    
+    /* حدود علوية خفيفة لتعطي إيحاء حافة الزجاج */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none; /* إزالة الحدود من الأسفل */
+    /* --- نهاية تأثير الزجاج --- */
+
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 20px 20px 0 0; /* زوايا دائرية من الأعلى فقط */
+    
+    /* التوهج اً */
+    box-shadow: 0px -5px 20px 0px rgba(29, 4, 4, 0.4); 
+}
+
+
+/* تنسيق الحاوية الداخلية للفوتر */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 20px 0;
+}
+
+/* تنسيق قسم الروابط */
+.footter-anchor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* مسافة بين الروابط */
+    flex-wrap: wrap;
+}
+
+.footter-anchor a ,.btn-login a{
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+.bookmarks a:hover{
+    color: #ff0000; /* تغيير اللون للأحمر عند التمرير */
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.footter-anchor a:hover {
+    color: #ff0000; /* تغيير اللون للأحمر عند التمرير */
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* تنسيق زر تسجيل الدخول داخل الفوتر */
+.sign-in-btn {
+    background: rgba(255, 0, 0, 0.2); /* خلفية حمراء زجاجية */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sign-in-btn a {
+    color: white !important;
+    font-weight: bold;
+}
+
+
+
+.btn-more:hover,.btn-login:hover,.sign-in-btn:hover {
+    background: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+    transform: translateY(-3px);
+}
+
+/* الخط الفاصل الزجاجي */
+.footer-divider {
+    width: 80%;
+    margin: 20px auto;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* تنسيق اللوجو */
+.logo-footer h1 {
+    font-size: 2.5rem;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    background: linear-gradient(to bottom, #fff, #888);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-footer i {
+    color: #ff0000;
+  
+     
+   
+  
+    text-shadow: 0 0 15px rgba(229, 9, 20, 0.8), 0 0 30px rgba(229, 9, 20, 0.4);
+}
+
+.logo-footer span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+
+/* Styling for demo movie cards */
+.movie-card {
+    background-color: #ddd;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.bac-slider {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+
+}
+
+.bac-slider figure {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+    animation: fade 28s infinite;
+    opacity: 0;
+}
+
+
+/* Gradient Overlay */
+/* Gradient Overlay on EACH figure now */
+.bac-slider figure::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Low opacity Black and Red Gradient */
+    background: linear-gradient(to right, #631414af, rgba(0, 0, 0, 0.395));
+    pointer-events: none;
+    z-index: 1;
+}
+/* ------------------------------------- */
+
+
+/* Logo Style */
+.logo {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    top: 20px;
+    left: 200px;
+    transform: translateX(-50%);
+    z-index: 1000;
+    /* On top of everything */
+    color: #ffffff;
+    /* Netflix Red */
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px #631414;
+}
+
+/* Ensure Text is above gradient */
+.bac-slider figcaption {
+    z-index: 666;
+    position: absolute;
+    bottom: 20px;
+    left: 200px;
+    /* Respecting user's manual change, fits with 1fr 60px grid */
+    color: #fff;
+    font-family: "Changa", sans-serif;
+
+    font-size: 4rem;
+    /* Large cinematic size */
+    font-weight: normal;
+    /* Bebas Neue is already bold/caps */
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 1);
+    /* High contrast shadow */
+}
+
+
+.bac-slider figure:nth-of-type(1) {
+    background-image: url(image/1.jpg);
+    animation-delay: 0s;
+}
+
+.bac-slider figure:nth-of-type(2) {
+    background-image: url(image/2.jpg);
+    animation-delay: 4s;
+}
+
+.bac-slider figure:nth-of-type(3) {
+    background-image: url(image/3.jpg);
+    animation-delay: 8s;
+}
+
+.bac-slider figure:nth-of-type(4) {
+    background-image: url(image/4.jpg);
+    animation-delay: 12s;
+}
+
+.bac-slider figure:nth-of-type(5) {
+    background-image: url(image/5.jpg);
+    animation-delay: 16s;
+}
+
+.bac-slider figure:nth-of-type(6) {
+    background-image: url(image/6.webp);
+    animation-delay: 20s;
+}
+
+.bac-slider figure:nth-of-type(7) {
+    background-image: url(image/7.jpg);
+    animation-delay: 24s;
+}
+
+
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    3.5% {
+        opacity: 1;
+    }
+
+    /* Fade in ~1s */
+    18% {
+        opacity: 1;
+    }
+
+    /* Hold until ~5s */
+    21.5% {
+        opacity: 0;
+    }
+
+    /* Fade out ~1s (Total 6s visible) */
+    100% {
+        opacity: 0;
+    }
+}
+
+
+.first-section{
+     direction: rtl;
+ background-image: linear-gradient(to right, rgba(0, 0, 0, 0.373));
+    padding: 1.5rem;
+  
+    height: 88vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    margin-right: 0;
+    height: 1200;
+
+
+
+}
+.swiper-container {
+    
+   padding-top: 10px;
+    height: 110vh;
+}
+.swiper-slide {
+    width: 350px; /* يجب أن يتطابق مع عرض الصورة */
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.swiper {
+    width: 100%; /* ليكون مرناً مع الشاشة */
+    max-width: 1300px; /* حدد أقصى عرض تريده */
+    height: 600px;
+    margin: 0 auto; /* لضمان توسيط الحاوية نفسها في الصفحة */
+   padding-bottom: 20px !important;
+   overflow: hidden !important;
+    position: relative;
+}
+/* الحاوية الأساسية */
+.slide-content {
+    position: relative;
+    overflow: hidden; 
+    border-radius: 20px;
+    /* تأكد أن الـ shadow موجود هنا لكي لا يختفي */
+    box-shadow: 2px 4px 15px 5px #871616; 
+}
+
+/* حاوية المعلومات - تظهر في الجزء السفلي فقط */
+.info-overlay {
+    position: absolute;
+    bottom: -100%; /* مخفية تحت */
+    left: 0;
+    width: 100%;
+    height: 35%; /* ستغطي 35% فقط من طول الصورة */
+
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.725),#631414a1); /* تدرج أسود */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    transition: bottom 0.4s ease-in-out;
+    z-index: 2; /* لضمان ظهورها فوق الصورة */
+}
+
+/* إظهار المعلومات عند التمرير */
+.slide-content:hover .info-overlay {
+    bottom: 0;
+}
+
+/* تنسيق النصوص لتكون صغيرة ومناسبة للمساحة */
+.info-overlay h3 {
+    font-size: 16px;
+    margin: 0;
+    color: #e50914;
+}
+
+.info-overlay p {
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+.btn-more{ 
+    padding: 10px 20px;
+    background-color: #631414;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}   
+
+
+.swiper-slide .slide-content img {
+    width: 350px;
+    height: 500px; /* للحفاظ على نسبة العرض/الارتفاع */
+    border-radius: 20px;
+    box-shadow: 0px 0px 30px 10px#631414;
+}
+
+/* Swiper Buttons */
+.swiper-button-prev,
+.swiper-button-next {
+    display: none; /* هذا سيخفي الأزرار تماماً */
+    
+}
+
+/* الحاوية العامة للنقاط */
+.swiper-pagination {
+    bottom: 10px !important; /* لرفع النقاط قليلاً عن الحافة */
+}
+
+/* تنسيق النقاط غير النشطة */
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff; /* لون النقاط العادية */
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* تنسيق النقطة النشطة (التي يقف عليها السلايدر حالياً) */
+.swiper-pagination-bullet-active {
+    width: 30px; /* جعل النقطة النشطة أعرض (تأثير عصري) */
+    border-radius: 5px;
+    background-color: #ea0f1a88; /* نفس لون نيتفليكس والأزرار السابقة */
+    opacity: 1;
+    box-shadow: 0px 0px 10px rgba(229, 9, 20, 0.8); /* توهج */
+}
+.title1{
+    text-align: center;
+
+ border-radius: 20px 20px 20px 20px;  
+width: 40%;
+    padding: 5px;
+ 
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+h1.slider-title2{
+     animation: appear  linear;
+    animation-timeline: view();
+    animation-range: entry 0;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(195, 0, 0, 0.8);
+   z-index: 100;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+}
+h1.slider-title1{
+    margin-top: 300px;
+     animation: appear  linear;
+    animation-timeline: view();
+    animation-range: entry 0;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(195, 0, 0, 0.8);
+   z-index: 100;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+}
+h2.title{
+    text-shadow: 2px 2px 4px rgba(204, 3, 3, 0.8);
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+}
+.section2{
+ direction: rtl;
+    margin-top: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/* القسم الرئيسي مع تأثير الانتقال */
+.main-wrapper {
+    max-width: 100% !important; /* منع أي عنصر من تجاوز عرض الشاشة */
+    margin-top: 50px;
+    position: relative;
+    width: 1460px;
+    height: 550px;
+    padding: 60px 0;
+    
+    background-image: url('image/1.jpg'); /* البداية */
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.8s ease-in-out; /* سرعة تغيير الخلفية */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+/* طبقة تعتيم الخلفية */
+.main-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:#631414cc;
+    z-index: 1;
+}
+
+.content-container {
+   
+    position: relative;
+    z-index: 2;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.title3{
+   font-size: 2rem;
+    color: rgb(255, 255, 255); margin-right: 20px; }
+
+/* حاوية التمرير */
+/* حاوية التمرير - تأكد من وجود هذه الخصائص */
+.scroll-wrapper {
+    display: flex !important; /* لضمان اصطفاف البطاقات */
+    gap: 20px;
+    overflow-x: auto !important; /* تفعيل التمرير الأفقي إجبارياً */
+    padding: 20px 20px 40px 20px;
+    scroll-behavior: smooth;
+    
+    /* إخفاء شريط التمرير الافتراضي لمتصفح فايرفوكس */
+    scrollbar-width: thick;
+    scrollbar-color: #fff1f1fb transparent;
+}
+
+/* --- تعديلات السكرول بار للمتصفحات (Chrome, Edge, Safari) --- */
+
+/* 1. يجب تحديد أن هذا الكود يعمل على العناصر التي تملك scroll */
+.scroll-wrapper::-webkit-scrollbar {
+    height: 12px !important; /* زيادة السمك قليلاً للتأكد من ظهوره */
+    display: block !important;
+}
+
+/* 2. خلفية المسار (السكة) */
+.scroll-wrapper::-webkit-scrollbar-track {
+    background: rgba(131, 4, 4, 0.05) !important;
+    border-radius: 10px !important;
+    margin: 0 100px !important; /* لجعله في المنتصف كما في الصورة */
+}
+
+/* 3. المقبض الرمادي (الجزء الذي يتحرك) */
+.scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: #b31c1c !important; /* اللون الرمادي الفاتح */
+    border-radius: 10px !important;
+    border: 2px solid transparent; /* إضافة حدود شفافة تزيد من بروزه */
+    background-clip: content-box;
+}
+
+/* 4. عند الحوم فوقه */
+.scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background-color: #f71414 !important;
+}
+
+
+
+.video-card {
+
+    min-width: 300px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.video-card:hover { transform: scale(1.05); }
+
+.thumbnail {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 180px;
+    box-shadow: 0 0 10px 10px rgba(207, 22, 22, 0.258);
+}
+
+.thumbnail img { width: 100%; height: 100%; object-fit: cover;
+ }
+
+.play-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+}
+
+.play-overlay span { font-size: 50px; color:#631414ab; }
+
+.video-card h3 { color: white; margin: 10px 0 5px; }
+.video-card p { color: #c52d2d; margin: 0; font-size: 14px; }
+
+/* نافذة المودال */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    z-index: 1000;
+}
+
+.modal-box {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    margin: 5% auto;
+}
+
+.close-modal {
+    position: absolute;
+    top: -40px; left: 0;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* the third section */
+
+
+
+
+
+  /* tittle bar */
+
+/* .red-bar {
+    width: 40px;
+    height: 30px;
+    background-color: #750808;
+    border-radius: 2px;
+    color: #750808;
+} */
+
+.celebrities-section {
+    margin-top: 20px;
+     width: 100%;
+    margin-right: 0;
+    height: 400px;
+   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.373));
+    padding: 1.5rem;
+  
+    padding: 40px;
+    direction: ltr; /* التنسيق كما في الصورة إنجليزي */
+    color: white;
+}
+
+.celebs-container {
+    height: inherit;
+    display: flex;
+    justify-content: center;
+     height: 500px;
+    gap: 50px;
+    overflow-x: auto; /* للسماح بالتمرير في الجوال */
+    padding: 20px 0;
+}
+
+.celeb-card {
+    margin-top: 10px;
+    flex: 0 0 auto;
+    width: 160px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.celeb-card:hover {
+    transform: translateY(-10px);
+}
+
+/* تنسيق الصورة الدائرية */
+.image-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 15px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* لجعلها دائرية */
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+/* تأثير التوهج الزجاجي عند الهوفر */
+.celeb-card:hover img {
+    border-color: #c30d0d;
+    box-shadow: 0 0 20px rgba(195, 13, 13, 0.6);
+}
+
+/* أيقونة القلب */
+.heart-icon {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px); /* تأثير زجاجي خلف القلب */
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.heart-icon:hover {
+    color: #ff0000;
+    transform: scale(1.2);
+}
+
+/* تنسيق النصوص */
+.rank-status {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.up-arrow {
+    color: #790a0a; /* لون أخضر للارتفاع */
+    font-size: 0.7rem;
+}
+
+.celeb-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.celeb-name:hover {
+    text-decoration: underline;
+}
+
+/* تخصيص السكرول بار إذا لزم الأمر */
+.celebs-container::-webkit-scrollbar {
+    height: 5px;
+}
+.celebs-container::-webkit-scrollbar-thumb {
+    background: #631414;
+    border-radius: 10px;
+}
+.back-to-top {
+    position: fixed;
+    bottom: 600px;
+    left: 30px; /* بما أن موقعك يدعم العربية، يفضل وضعه يساراً */
+    width: 60px;
+    height: 60px;
+    background-color: rgba(99, 20, 20, 0.6); /* أحمر زجاجي شفاف */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2000;
+    transition: all 0.4s ease;
+    opacity: 0; /* مخفي في البداية */
+    visibility: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* حالة الظهور */
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.back-to-top span {
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+/* تأثير الهوفر */
+.back-to-top:hover {
+    background-color: #ff0000;
+    box-shadow: 0 0 20px #ff0000;
+    transform: scale(1.1);
+}
+
+
+
+
+
+
+ /* all responsive code */
+
+
+    
+/* 
+/* --- MOBILE RESPONSIVE (Drawer Logic) --- */
+/* --- MOBILE RESPONSIVE (Drawer Logic) --- */
+@media (max-width: 768px) {
+       body {
+        overflow-x: hidden; /* منع التمرير الجانبي على الجسم */
+    }
+  .menu-toggle {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    border-radius: 3px !important;
+    border: none !important;
+     padding: 4px 5px !important;
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+     color: white;
+    z-index: 99999 !important;
+    background: #631414 !important;
+               }
+
+.website-layout,
+.site-header,
+.first-section,
+.section2,
+.site-footer {
+    width: 100% !important;
+    margin: 0 !important;
+    overflow-x: hidden;
+}
+
+    .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 240px;
+    height: 100vh;
+    background: #631414;
+    z-index: 1200;
+
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+    .sidebar-nav a {
+        justify-content: flex-start;
+        padding: 15px 25px;
+        gap: 20px;
+    }
+
+    .sidebar-nav span {
+        display: inline-block; /* Show Arabic text in drawer */
+        font-size: 1.1rem;
+    }
+
+     
+
+    .logo-bookmark-nave {
+        /* تقليل الحشو الجانبي لأنه 150px كبير جداً للموبايل */
+      
+        padding: 0 20px; 
+        height: 60px; /* تقليل الارتفاع قليلاً */
+        justify-content: space-between; /* توزيع اللوجو والروابط على الأطراف */
+    }
+
+    .logo h1 {
+        font-size: 15px; /* تصغير حجم اللوجو */
+        letter-spacing: 1px;
+    }
+
+    .logo i {
+        font-size: 15px; /* تصغير الأيقونة */
+    }
+
+    .bookmarks {
+      display: none;
+    }
+
+    .hnav {
+        font-size: 0.9rem; /* تصغير حجم الخط للروابط */
+        margin: 5px;
+    }
+/* 1. تصفير أي مساحات جانبية في الحاوية الكبرى */
+    .website-layout {
+        display: block !important; /* إلغاء الجريد مؤقتاً لتفادي مشاكل الأعمدة */
+        width: 100% !important;
+        overflow-x: hidden; /* منع التمرير الجانبي نهائياً */
+    }
+
+    /* 2. إجبار الهيدر والسلايدر على أخذ عرض الشاشة بالكامل (100%) */
+    .site-header, .bac-slider {
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* 3. حل مشكلة حجم الصور (تصغير العرض ليتناسب مع الموبايل) */
+    .bac-slider {
+        height: auto !important; 
+        aspect-ratio: 16 / 9 !important; /* يحافظ على أبعاد الصورة العرضية في شاشة طولية */
+    }
+
+    .bac-slider figure {
+        /* لجعل الصورة تظهر بالكامل وبحجم أصغر */
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: top center !important; 
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* 4. إلغاء الـ Padding الكبير الذي كان 150px */
+    .logo-bookmark-nave {
+        padding: 0 15px !important; /* مسافة صغيرة جداً للجوانب */
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    /* 5. تصغير النصوص لتناسب العرض الجديد */
+    .bac-slider figcaption {
+        left: 2px !important;
+        bottom: 5px !important;
+        font-size: 1.2rem !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+.back-ani-color {
+
+        /* 1. جعل الصندوق أعرض */
+        width: 100% !important;       /* يأخذ نسبة كبيرة من عرض الشاشة */
+               /* زيادة الحد الأقصى للعرض قليلاً */
+        height: auto !important;
+        
+        /* توسيط الصندوق */
+        position: relative !important;
+        left: 0% !important;
+        top: 50px !important;
+
+        margin: 30px auto !important;
+       
+        /* تعديل المسافات الداخلية */
+        padding: 30px 15px;
+    }
+
+    .login-text {
+        /* 2. تصغير حجم الخط الرئيسي */
+        font-size: 16px !important;  /* تصغير الخط ليصبح أنسب */
+        line-height: 1.4;            /* تحسين المسافة بين الأسطر */
+        margin-bottom: 25px;         /* مسافة مناسبة قبل الأزرار */
+    }
+
+    .btn-login {
+        /* 3. تصغير حجم الأزرار */
+        width: 60% !important;       /* جعل الأزرار أضيق من الصندوق */
+        max-width: 220px;            /* وضع حد أقصى لعرض الزر */
+        height: 40px !important;      /* تقليل ارتفاع الزر */
+        margin: 10px auto !important;
+        border-radius: 25px;         /* تعديل الانحناء ليناسب الحجم الجديد */
+        
+        /* لضمان توسيط النص داخل الزر */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-login a {
+        /* تصغير خط النص داخل الأزرار */
+        font-size: 10px !important;
+    }
+
+
+    /* 1. ضبط القسم الرئيسي */
+    .first-section {
+        height: auto !important; /* السماح للطول بالتمدد حسب المحتوى */
+        padding: 1rem;
+        min-height: 80vh;
+    }
+
+    /* 2. تصغير العناوين الضخمة */
+    h1.slider-title1 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-top: 200px !important;  /* إلغاء الـ 300px الكبيرة */
+        margin-bottom: 10px;
+
+        padding: 0 10px;
+    }
+     
+    h1.slider-title2 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-bottom: 10px;
+
+        padding: 0 10px;
+    }
+
+    .title1 {
+        width: 90% !important; /* جعل حاوية العنوان تأخذ عرض الشاشة */
+    }
+
+    /* 3. ضبط السوايبر (Swiper) والمقاسات */
+    .swiper-container {
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .swiper {
+        height: 450px !important; /* تقليل ارتفاع منطقة السلايدر */
+    }
+
+    .swiper-slide {
+        width: 250px !important; /* تصغير عرض الشريحة للموبايل */
+        height: 400px !important;
+    }
+
+    .swiper-slide .slide-content img {
+        width: 100% !important;  /* تجعل الصورة تأخذ عرض الشريحة الجديد */
+        height: 380px !important; /* تقليل الارتفاع */
+        box-shadow: 0px 0px 15px 5px #871616; /* تخفيف الظل قليلاً */
+    }
+
+    /* 4. ضبط طبقة المعلومات (Overlay) */
+    .info-overlay {
+        height: 45%; /* زيادة الارتفاع قليلاً لتناسب النص في المساحة الصغيرة */
+        bottom: 0; /* اختياريا: جعلها ظاهرة دائماً في الموبايل لأن الـ hover صعب اللمس */
+    }
+
+    .info-overlay h3 {
+        font-size: 14px;
+    }
+
+    .info-overlay p {
+        font-size: 10px;
+    }
+
+    .btn-more {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+    /* الحاوية العامة للنقاط */
+.swiper-pagination {
+    bottom: 40px !important; /* لرفع النقاط قليلاً عن الحافة */
+}
+
+    /* 5. ضبط نقاط التنقل (Pagination) */
+    .swiper-pagination-bullet {
+        
+        width: 8px;
+        height: 8px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 20px; /* تقليل عرض النقطة النشطة لتناسب الشاشة */
+    }
+/* 1. ضبط القسم الخارجي */
+    .section2 {
+        margin-top: 200px !important; /* تقليل المسافة من 200px لعدم ترك فراغ كبير */
+        width: 100% !important;
+    }
+
+    /* 2. تصغير الحاوية الرئيسية (Wrapper) */
+    .main-wrapper {
+        width: 100% !important;    /* إلغاء الـ 1460px */
+        height: auto !important;    /* جعل الارتفاع مرناً حسب المحتوى */
+        padding: 40px 10px !important;
+        margin-top: 20px !important;
+    }
+
+    /* 3. ضبط العنوان */
+    .title3 {
+        font-size: 1.4rem !important; /* تصغير حجم الخط */
+        margin-right: 10px !important;
+                color: #000000;
+                text-decoration: solid  2px 10px #ff0000;
+    }
+
+    /* 4. تعديل حاوية البطاقات وسرعة التمرير */
+    .scroll-wrapper {
+        gap: 15px !important; /* تقليل المسافات بين البطاقات */
+        padding: 10px 10px 30px 10px !important;
+        /* تحسين التمرير باللمس على الجوال */
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    /* 5. تصغير حجم بطاقة الفيديو */
+    .video-card {
+        min-width: 220px !important; /* تصغير عرض البطاقة ليظهر جزء من التالية */
+    }
+
+    .thumbnail {
+        height: 140px !important; /* تقليل ارتفاع الصورة المصغرة */
+    }
+
+    /* 6. تعديل شريط التمرير (Scrollbar) ليناسب الجوال */
+    .scroll-wrapper::-webkit-scrollbar {
+        height: 6px !important; /* شريط أنحف للجوال */
+    }
+
+    .scroll-wrapper::-webkit-scrollbar-track {
+        margin: 0 20px !important; /* تقليل الهوامش الجانبية للسكرول */
+    }
+
+    /* 7. ضبط نافذة الفيديو (Modal) في الموبايل */
+    .modal-box {
+        width: 95% !important;
+        margin: 20% auto !important;
+    }
+
+    iframe {
+        height: 250px !important; /* تقليل ارتفاع الفيديو المفتوح */
+    }
+
+
+    /* 1. ضبط القسم الخارجي */
+    .celebrities-section {
+        padding: 20px 10px !important; /* تقليل الحشو الجانبي */
+        height: auto !important; /* السماح للطول بالتمدد */
+        margin-top: 10px;
+    }
+
+    /* 2. تحسين حاوية التمرير */
+    .celebs-container {
+        height: auto !important;
+        gap: 15px !important; /* تقليل المسافة بين المشاهير من 50px إلى 15px */
+        justify-content: flex-start !important; /* التراصف من البداية للسماح بالتمرير */
+        padding: 10px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch; /* تمرير ناعم على آيفون */
+    }
+
+    /* 3. تصغير حجم بطاقة المشهور */
+    .celeb-card {
+        width: 130px !important; /* تصغير عرض البطاقة */
+    }
+
+    /* 4. تصغير الصور الدائرية */
+    .image-wrapper {
+        width: 100px !important; /* تصغير القطر من 150px إلى 100px */
+        height: 100px !important;
+        margin-bottom: 10px;
+    }
+
+    /* 5. ضبط النصوص */
+    .celeb-name {
+        font-size: 0.9rem !important; /* تصغير الخط قليلاً */
+    }
+
+    .rank-status {
+        font-size: 0.75rem !important;
+    }
+
+    /* 6. تحسين أيقونة القلب للمس */
+    .heart-icon {
+        width: 25px;
+        height: 25px;
+        bottom: 2px;
+        left: 2px;
+    }
+
+    /* 1. ضبط الحاوية الرئيسية للفوتر */
+    .site-footer {
+        margin-top: 50px !important; /* تقليل المسافة العلوية الكبيرة */
+        margin-right: 0 !important;   /* إلغاء الهامش الجانبي */
+        height: auto !important;      /* السماح للطول بالتمدد حسب المحتوى */
+        
+        /* جعل العرض يملأ الشاشة بالكامل وإلغاء حسابات السايدبار */
+        width: 100% !important;
+        max-width: 100% !important;
+        
+        border-radius: 15px 15px 0 0; /* تصغير الزوايا قليلاً */
+        padding: 20px 10px;
+    }
+
+    /* 2. ضبط الحاوية الداخلية */
+    .footer-content {
+        gap: 20px; /* إضافة مسافة بين العناصر المكدسة عمودياً */
+        padding: 10px 0;
+    }
+
+    /* 3. اللوجو في الفوتر */
+    .logo-footer h1 {
+        font-size: 1.8rem !important; /* تصغير حجم اللوجو */
+        letter-spacing: 2px;
+    }
+
+    /* 4. الروابط (Navigation Links) */
+    .footter-anchor {
+        gap: 15px; /* تقليل المسافة بين الروابط */
+        flex-direction: row; /* الحفاظ على الصف مع السماح بالالتفاف */
+        justify-content: center;
+    }
+
+    .footter-anchor a {
+        font-size: 0.9rem !important; /* تصغير الخط قليلاً */
+    }
+
+    /* 5. زر تسجيل الدخول في الفوتر */
+    .sign-in-btn {
+        width: fit-content;
+        margin: 0 auto;
+        padding: 8px 20px;
+    }
+
+    /* 6. الخط الفاصل */
+    .footer-divider {
+        width: 90%; /* جعل الخط أعرض في الشاشات الصغيرة */
+        margin: 10px auto;
+    }
+
+    .logo-footer span {
+        font-size: 0.75rem; /* تصغير نص الحقوق */
+    }
+
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 900px) {
+    
+
+
+        body {
+            overflow-x: hidden; /* منع التمرير الجانبي على الجسم */
+        }
+    .logo-bookmark-nave {
+        /* تقليل الحشو الجانبي لأنه 150px كبير جداً للموبايل */
+       margin-right: 80px;
+        padding: 0 50px;
+        height: 60px; /* تقليل الارتفاع قليلاً */
+        justify-content: space-between; /* توزيع اللوجو والروابط على الأطراف */
+    }
+
+
+    .logo h1 {
+        font-size: 18px; /* تصغير حجم اللوجو */
+        letter-spacing: 1px;
+    }
+
+    .logo i {
+        font-size: 20px; /* تصغير الأيقونة */
+    }
+
+    .hnav {
+        font-size: 1rem; /* تصغير حجم الخط للروابط */
+        margin: 5px;
+    }
+    
+
+     .website-layout {
+        display: block !important; /* إلغاء الجريد مؤقتاً لتفادي مشاكل الأعمدة */
+        width: 100% !important;
+        overflow-x: hidden; /* منع التمرير الجانبي نهائياً */
+    }
+
+
+    
+    /* 3. حل مشكلة حجم الصور (تصغير العرض ليتناسب مع الموبايل) */
+    .bac-slider {
+        height: auto !important; 
+        aspect-ratio: 16 / 9 !important; /* يحافظ على أبعاد الصورة العرضية في شاشة طولية */
+    }
+
+    .bac-slider figure {
+        /* لجعل الصورة تظهر بالكامل وبحجم أصغر */
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: top center !important; 
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* 4. إلغاء الـ Padding الكبير الذي كان 150px */
+    .logo-bookmark-nave {
+        padding: 0 15px !important; /* مسافة صغيرة جداً للجوانب */
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    /* 5. تصغير النصوص لتناسب العرض الجديد */
+    .bac-slider figcaption {
+        right: 100px !important;
+        bottom: 10px !important;
+        font-size: 2rem !important;
+        width: 100% !important;
+        text-align: center !important;
+        
+    }
+
+
+
+    .back-ani-color {
+
+        /* 1. جعل الصندوق أعرض */
+        width: 100% !important;       /* يأخذ نسبة كبيرة من عرض الشاشة */
+               /* زيادة الحد الأقصى للعرض قليلاً */
+        height: auto !important;
+        
+        /* توسيط الصندوق */
+        position: relative !important;
+        left: 0px !important;
+        right: 40px;
+        top: 50px !important;
+
+        margin: 30px auto !important;
+       
+        /* تعديل المسافات الداخلية */
+        padding: 30px 15px;
+    }
+
+    .login-text {
+        /* 2. تصغير حجم الخط الرئيسي */
+        font-size: 2rem !important;  /* تصغير الخط ليصبح أنسب */
+        line-height: 1.4;            /* تحسين المسافة بين الأسطر */
+        margin-bottom: 25px;         /* مسافة مناسبة قبل الأزرار */
+    }
+
+    .btn-login {
+        /* 3. تصغير حجم الأزرار */
+        width: 60% !important;       /* جعل الأزرار أضيق من الصندوق */
+        max-width: 220px;            /* وضع حد أقصى لعرض الزر */
+        height: 50px !important;      /* تقليل ارتفاع الزر */
+        margin: 10px auto !important;
+        border-radius: 25px;         /* تعديل الانحناء ليناسب الحجم الجديد */
+        
+        /* لضمان توسيط النص داخل الزر */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-login a {
+        /* تصغير خط النص داخل الأزرار */
+        font-size: 1rem !important;
+    }
+ 
+    /* 1. ضبط القسم الرئيسي */
+    .first-section {
+        height: auto !important; /* السماح للطول بالتمدد حسب المحتوى */
+        padding: 1rem;
+        min-height: 80vh;
+        width: 90% !important;
+        margin-right: 80px;
+    }
+
+    /* 2. تصغير العناوين الضخمة */
+    h1.slider-title1 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-top: 200px !important;  /* إلغاء الـ 300px الكبيرة */
+        margin-bottom: 10px;
+         margin-right: 80px;
+        padding: 0 10px;
+    }
+     
+    h1.slider-title2 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-bottom: 10px;
+
+        padding: 0 10px;
+    }
+
+    .title1 {
+        width: 90% !important; /* جعل حاوية العنوان تأخذ عرض الشاشة */
+    }
+
+    /* 3. ضبط السوايبر (Swiper) والمقاسات */
+    .swiper-container {
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .swiper {
+        height: 450px !important; /* تقليل ارتفاع منطقة السلايدر */
+   
+    }
+
+    .swiper-slide {
+        width: 250px !important; /* تصغير عرض الشريحة للموبايل */
+        height: 400px !important;
+    }
+
+    .swiper-slide .slide-content img {
+        width: 100% !important;  /* تجعل الصورة تأخذ عرض الشريحة الجديد */
+        height: 380px !important; /* تقليل الارتفاع */
+        box-shadow: 0px 0px 15px 5px #871616; /* تخفيف الظل قليلاً */
+    }
+
+    /* 4. ضبط طبقة المعلومات (Overlay) */
+    .info-overlay {
+        height: 45%; /* زيادة الارتفاع قليلاً لتناسب النص في المساحة الصغيرة */
+      
+    }
+
+    .info-overlay h3 {
+        font-size: 14px;
+    }
+
+    .info-overlay p {
+        font-size: 10px;
+    }
+
+    .btn-more {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+    /* الحاوية العامة للنقاط */
+.swiper-pagination {
+    bottom: 40px !important; /* لرفع النقاط قليلاً عن الحافة */
+}
+
+    /* 5. ضبط نقاط التنقل (Pagination) */
+    .swiper-pagination-bullet {
+        
+        width: 8px;
+        height: 8px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 20px; /* تقليل عرض النقطة النشطة لتناسب الشاشة */
+    }
+
+ .section2 {
+      margin-right: 80px;
+        margin-top: 200px !important; /* تقليل المسافة من 200px لعدم ترك فراغ كبير */
+        width: 90% !important;
+    }
+
+    /* 2. تصغير الحاوية الرئيسية (Wrapper) */
+    .main-wrapper {
+        width: 100% !important;    /* إلغاء الـ 1460px */
+        height: auto !important;    /* جعل الارتفاع مرناً حسب المحتوى */
+        padding: 40px 10px !important;
+        margin-top: 20px !important;
+    }
+
+    /* 3. ضبط العنوان */
+    .title3 {
+        font-size: 1.4rem !important; /* تصغير حجم الخط */
+        margin-right: 10px !important;
+                color: #000000;
+                text-decoration: solid  2px 10px #ff0000;
+    }
+
+    /* 4. تعديل حاوية البطاقات وسرعة التمرير */
+    .scroll-wrapper {
+        gap: 15px !important; /* تقليل المسافات بين البطاقات */
+        padding: 10px 10px 30px 10px !important;
+        /* تحسين التمرير باللمس على الجوال */
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    /* 5. تصغير حجم بطاقة الفيديو */
+    .video-card {
+        min-width: 220px !important; /* تصغير عرض البطاقة ليظهر جزء من التالية */
+    }
+
+    .thumbnail {
+        height: 140px !important; /* تقليل ارتفاع الصورة المصغرة */
+    }
+
+    /* 6. تعديل شريط التمرير (Scrollbar) ليناسب الجوال */
+    .scroll-wrapper::-webkit-scrollbar {
+        height: 6px !important; /* شريط أنحف للجوال */
+    }
+
+    .scroll-wrapper::-webkit-scrollbar-track {
+        margin: 0 20px !important; /* تقليل الهوامش الجانبية للسكرول */
+    }
+
+    /* 7. ضبط نافذة الفيديو (Modal) في الموبايل */
+    .modal-box {
+        width: 95% !important;
+        margin: 20% auto !important;
+    }
+
+    iframe {
+        height: 400px !important; /* تقليل ارتفاع الفيديو المفتوح */
+    }
+    /* 1. ضبط القسم الخارجي */
+    .celebrities-section {
+        padding: 20px 10px !important; /* تقليل الحشو الجانبي */
+        height: auto !important; /* السماح للطول بالتمدد */
+        margin-top: 10px;
+    }
+
+    /* 2. تحسين حاوية التمرير */
+    .celebs-container {
+        height: auto !important;
+        gap: 15px !important; /* تقليل المسافة بين المشاهير من 50px إلى 15px */
+        justify-content: flex-start !important; /* التراصف من البداية للسماح بالتمرير */
+        padding: 10px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch; /* تمرير ناعم على آيفون */
+    }
+
+    /* 3. تصغير حجم بطاقة المشهور */
+    .celeb-card {
+        width: 130px !important; /* تصغير عرض البطاقة */
+    }
+
+    /* 4. تصغير الصور الدائرية */
+    .image-wrapper {
+        width: 100px !important; /* تصغير القطر من 150px إلى 100px */
+        height: 100px !important;
+        margin-bottom: 10px;
+    }
+
+    /* 5. ضبط النصوص */
+    .celeb-name {
+        font-size: 0.9rem !important; /* تصغير الخط قليلاً */
+    }
+
+    .rank-status {
+        font-size: 0.75rem !important;
+    }
+
+    /* 6. تحسين أيقونة القلب للمس */
+    .heart-icon {
+        width: 25px;
+        height: 25px;
+        bottom: 2px;
+        left: 2px;
+    }
+    
+    /* 1. ضبط الحاوية الرئيسية للفوتر */
+    .site-footer {
+        margin-top: 200px !important; /* تقليل المسافة العلوية الكبيرة */
+        margin-right: 85px !important;   /* إلغاء الهامش الجانبي */
+        height: auto !important;      /* السماح للطول بالتمدد حسب المحتوى */
+        
+        /* جعل العرض يملأ الشاشة بالكامل وإلغاء حسابات السايدبار */
+        width: 90% !important;
+        max-width: 100% !important;
+        
+        border-radius: 15px 15px 0 0; /* تصغير الزوايا قليلاً */
+        padding: 20px 10px;
+    }
+
+    
+    /* 2. ضبط الحاوية الداخلية */
+    .footer-content {
+        gap: 20px; /* إضافة مسافة بين العناصر المكدسة عمودياً */
+        padding: 10px 0;
+    }
+
+    /* 3. اللوجو في الفوتر */
+    .logo-footer h1 {
+        font-size: 1.8rem !important; /* تصغير حجم اللوجو */
+        letter-spacing: 2px;
+    }
+
+    /* 4. الروابط (Navigation Links) */
+    .footter-anchor {
+        margin-right:100px;
+        gap: 50px; /* تقليل المسافة بين الروابط */
+        flex-direction: row; /* الحفاظ على الصف مع السماح بالالتفاف */
+        justify-content: center;
+    }
+
+    .footter-anchor a {
+       
+        font-size: 0.9rem !important; /* تصغير الخط قليلاً */
+    }
+
+    /* 5. زر تسجيل الدخول في الفوتر */
+    .sign-in-btn {
+        
+        margin-right: 40px;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 8px 20px;
+    }
+
+    /* 6. الخط الفاصل */
+    .footer-divider {
+        width: 90%; /* جعل الخط أعرض في الشاشات الصغيرة */
+        margin: 10px auto;
+    }
+
+    .logo-footer span {
+        font-size: 0.75rem; /* تصغير نص الحقوق */
+    }
+
+
+}
+
+
+@media screen and (min-width: 900px) and (max-width: 1285px){
+
+
+  .logo-bookmark-nave {
+        /* تقليل الحشو الجانبي لأنه 150px كبير جداً للموبايل */
+      
+         margin-right: 100px;   
+        height: 60px; /* تقليل الارتفاع قليلاً */
+        justify-content: space-between; /* توزيع اللوجو والروابط على الأطراف */
+    }
+
+
+    .logo h1 {
+        margin-left: 40px;
+        font-size: 30px; /* تصغير حجم اللوجو */
+        letter-spacing: 1px;
+    }
+
+    .logo i {
+        font-size: 25px; /* تصغير الأيقونة */
+    }
+
+    .hnav {
+        font-size: 1.2rem; /* تصغير حجم الخط للروابط */
+        margin: 10px;
+        padding-top: 20px;
+    }
+
+     .website-layout {
+        display: block !important; /* إلغاء الجريد مؤقتاً لتفادي مشاكل الأعمدة */
+        width: 100% !important;
+        overflow-x: hidden; /* منع التمرير الجانبي نهائياً */
+    }
+
+
+    
+    /* 3. حل مشكلة حجم الصور (تصغير العرض ليتناسب مع الموبايل) */
+    .bac-slider {
+        height: auto !important; 
+        aspect-ratio: 16 / 9 !important; /* يحافظ على أبعاد الصورة العرضية في شاشة طولية */
+    }
+
+    .bac-slider figure {
+        /* لجعل الصورة تظهر بالكامل وبحجم أصغر */
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: top center !important; 
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    /* 4. إلغاء الـ Padding الكبير الذي كان 150px */
+    .logo-bookmark-nave {
+        padding: 0 15px !important; /* مسافة صغيرة جداً للجوانب */
+        width: 100% !important;
+        justify-content: space-between !important;
+    }
+
+    /* 5. تصغير النصوص لتناسب العرض الجديد */
+    .bac-slider figcaption {
+        right: 400px !important;
+        bottom: 10px !important;
+        font-size: 3rem !important;
+        width: 100% !important;
+       
+        
+    }
+
+
+
+    .back-ani-color {
+
+        /* 1. جعل الصندوق أعرض */
+        width: 100% !important;       /* يأخذ نسبة كبيرة من عرض الشاشة */
+               /* زيادة الحد الأقصى للعرض قليلاً */
+        height: auto !important;
+        
+        /* توسيط الصندوق */
+        position: relative !important;
+        left: 0px !important;
+        right: 40px;
+        top: 50px !important;
+
+        margin: 30px auto !important;
+       
+        /* تعديل المسافات الداخلية */
+        padding: 30px 15px;
+    }
+
+    .login-text {
+        /* 2. تصغير حجم الخط الرئيسي */
+        font-size: 2rem !important;  /* تصغير الخط ليصبح أنسب */
+        line-height: 1.4;            /* تحسين المسافة بين الأسطر */
+        margin-bottom: 25px;         /* مسافة مناسبة قبل الأزرار */
+    }
+
+    .btn-login {
+        /* 3. تصغير حجم الأزرار */
+        width: 60% !important;       /* جعل الأزرار أضيق من الصندوق */
+        max-width: 220px;            /* وضع حد أقصى لعرض الزر */
+        height: 50px !important;      /* تقليل ارتفاع الزر */
+        margin: 10px auto !important;
+        border-radius: 25px;         /* تعديل الانحناء ليناسب الحجم الجديد */
+        
+        /* لضمان توسيط النص داخل الزر */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-login a {
+        /* تصغير خط النص داخل الأزرار */
+        font-size: 1rem !important;
+    }
+
+    /* 1. ضبط القسم الرئيسي */
+    .first-section {
+        height: auto !important; /* السماح للطول بالتمدد حسب المحتوى */
+        padding: 1rem;
+        min-height: 80vh;
+        width: 90% !important;
+        margin-right: 35px;
+    }
+
+    /* 2. تصغير العناوين الضخمة */
+    h1.slider-title1 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-top: 200px !important;  /* إلغاء الـ 300px الكبيرة */
+        margin-bottom: 10px;
+         margin-right: 30px;
+        padding: 0 10px;
+    }
+     
+    h1.slider-title2 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-bottom: 10px;
+
+        padding: 0 10px;
+    }
+
+    .title1 {
+        width: 90% !important; /* جعل حاوية العنوان تأخذ عرض الشاشة */
+    }
+
+    /* 3. ضبط السوايبر (Swiper) والمقاسات */
+    .swiper-container {
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .swiper {
+        height: 450px !important; /* تقليل ارتفاع منطقة السلايدر */
+   
+    }
+
+    .swiper-slide {
+        width: 250px !important; /* تصغير عرض الشريحة للموبايل */
+        height: 400px !important;
+    }
+
+    .swiper-slide .slide-content img {
+        width: 100% !important;  /* تجعل الصورة تأخذ عرض الشريحة الجديد */
+        height: 380px !important; /* تقليل الارتفاع */
+        box-shadow: 0px 0px 15px 5px #871616; /* تخفيف الظل قليلاً */
+    }
+
+    /* 4. ضبط طبقة المعلومات (Overlay) */
+    .info-overlay {
+        height: 45%; /* زيادة الارتفاع قليلاً لتناسب النص في المساحة الصغيرة */
+       
+    }
+
+    .info-overlay h3 {
+        font-size: 14px;
+    }
+
+    .info-overlay p {
+        font-size: 10px;
+    }
+
+    .btn-more {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+    /* الحاوية العامة للنقاط */
+.swiper-pagination {
+    bottom: 40px !important; /* لرفع النقاط قليلاً عن الحافة */
+}
+
+    /* 5. ضبط نقاط التنقل (Pagination) */
+    .swiper-pagination-bullet {
+        
+        width: 8px;
+        height: 8px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 20px; /* تقليل عرض النقطة النشطة لتناسب الشاشة */
+    }
+
+
+ .section2 {
+      margin-right: 60px;
+        margin-top: 200px !important; /* تقليل المسافة من 200px لعدم ترك فراغ كبير */
+        width: 95% !important;
+    }
+
+    /* 2. تصغير الحاوية الرئيسية (Wrapper) */
+    .main-wrapper {
+        width: 100% !important;    /* إلغاء الـ 1460px */
+        height: auto !important;    /* جعل الارتفاع مرناً حسب المحتوى */
+        padding: 40px 10px !important;
+        margin-top: 20px !important;
+    }
+
+    /* 3. ضبط العنوان */
+    .title3 {
+        font-size: 1.4rem !important; /* تصغير حجم الخط */
+        margin-right: 10px !important;
+                color: #000000;
+                text-decoration: solid  2px 10px #ff0000;
+    }
+
+    /* 4. تعديل حاوية البطاقات وسرعة التمرير */
+    .scroll-wrapper {
+        gap: 15px !important; /* تقليل المسافات بين البطاقات */
+        padding: 10px 10px 30px 10px !important;
+        /* تحسين التمرير باللمس على الجوال */
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    /* 5. تصغير حجم بطاقة الفيديو */
+    .video-card {
+        min-width: 220px !important; /* تصغير عرض البطاقة ليظهر جزء من التالية */
+    }
+
+    .thumbnail {
+        height: 140px !important; /* تقليل ارتفاع الصورة المصغرة */
+    }
+
+    /* 6. تعديل شريط التمرير (Scrollbar) ليناسب الجوال */
+    .scroll-wrapper::-webkit-scrollbar {
+        height: 6px !important; /* شريط أنحف للجوال */
+    }
+
+    .scroll-wrapper::-webkit-scrollbar-track {
+        margin: 0 20px !important; /* تقليل الهوامش الجانبية للسكرول */
+    }
+
+    /* 7. ضبط نافذة الفيديو (Modal) في الموبايل */
+    .modal-box {
+        width: 95% !important;
+        margin: 20% auto !important;
+    }
+
+    iframe {
+        height: 400px !important; /* تقليل ارتفاع الفيديو المفتوح */
+    }
+    
+      /* 1. ضبط القسم الخارجي */
+    .celebrities-section {
+        padding: 20px 10px !important; /* تقليل الحشو الجانبي */
+        /* السماح للطول بالتمدد */
+        margin-top: 10px;
+        margin-right: 40px;
+    }
+
+  /* 1. ضبط الحاوية الرئيسية للفوتر */
+    .site-footer {
+        margin-top: 200px !important; /* تقليل المسافة العلوية الكبيرة */
+        margin-right: 100px !important;   /* إلغاء الهامش الجانبي */
+        height: auto !important;      /* السماح للطول بالتمدد حسب المحتوى */
+        
+        /* جعل العرض يملأ الشاشة بالكامل وإلغاء حسابات السايدبار */
+        width: 90% !important;
+        max-width: 100% !important;
+        
+        border-radius: 15px 15px 0 0; /* تصغير الزوايا قليلاً */
+        padding: 20px 10px;
+    }
+
+
+    
+}
+
+@media (min-width: 1285px) and (max-width: 1440px) {
+
+ 
+    /* 3. حل مشكلة حجم الصور (تصغير العرض ليتناسب مع الموبايل) */
+    .bac-slider {
+        height: auto !important; 
+        aspect-ratio: 16 / 9 !important; /* يحافظ على أبعاد الصورة العرضية في شاشة طولية */
+    }
+
+    .bac-slider figure {
+        /* لجعل الصورة تظهر بالكامل وبحجم أصغر */
+        background-size: contain !important; 
+        background-repeat: no-repeat !important;
+        background-position: top center !important; 
+        width: 100% !important;
+        height: 100% !important;
+    }
+/* 5. تصغير النصوص لتناسب العرض الجديد */
+    .bac-slider figcaption {
+        right: 400px !important;
+        bottom: 10px !important;
+        font-size: 3rem !important;
+        width: 100% !important;
+       
+        
+    }
+
+
+
+    /* 1. ضبط القسم الرئيسي */
+    .first-section {
+        height: auto !important; /* السماح للطول بالتمدد حسب المحتوى */
+        padding: 1rem;
+        min-height: 80vh;
+        width: 90% !important;
+        margin-right: 35px;
+    }
+
+    /* 2. تصغير العناوين الضخمة */
+    h1.slider-title1 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-top: 200px !important;  /* إلغاء الـ 300px الكبيرة */
+        margin-bottom: 10px;
+         margin-right: 30px;
+        padding: 0 10px;
+    }
+     
+    h1.slider-title2 {
+        font-size: 1.8rem !important; /* تصغير من 3rem إلى 1.8rem */
+        margin-bottom: 10px;
+
+        padding: 0 10px;
+    }
+
+    .title1 {
+        width: 90% !important; /* جعل حاوية العنوان تأخذ عرض الشاشة */
+    }
+
+    /* 3. ضبط السوايبر (Swiper) والمقاسات */
+    .swiper-container {
+        height: auto;
+        padding-top: 20px;
+    }
+
+    .swiper {
+        height: 450px !important; /* تقليل ارتفاع منطقة السلايدر */
+   
+    }
+
+    .swiper-slide {
+        width: 250px !important; /* تصغير عرض الشريحة للموبايل */
+        height: 400px !important;
+    }
+
+    .swiper-slide .slide-content img {
+        width: 100% !important;  /* تجعل الصورة تأخذ عرض الشريحة الجديد */
+        height: 380px !important; /* تقليل الارتفاع */
+        box-shadow: 0px 0px 15px 5px #871616; /* تخفيف الظل قليلاً */
+    }
+
+    /* 4. ضبط طبقة المعلومات (Overlay) */
+    .info-overlay {
+        height: 45%; /* زيادة الارتفاع قليلاً لتناسب النص في المساحة الصغيرة */
+       
+    }
+
+    .info-overlay h3 {
+        font-size: 14px;
+    }
+
+    .info-overlay p {
+        font-size: 10px;
+    }
+
+    .btn-more {
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+    /* الحاوية العامة للنقاط */
+.swiper-pagination {
+    bottom: 40px !important; /* لرفع النقاط قليلاً عن الحافة */
+}
+
+    /* 5. ضبط نقاط التنقل (Pagination) */
+    .swiper-pagination-bullet {
+        
+        width: 8px;
+        height: 8px;
+    }
+    .swiper-pagination-bullet-active {
+        width: 20px; /* تقليل عرض النقطة النشطة لتناسب الشاشة */
+    }
+
+
+
+
+
+
+
+
+
+
+}
+   
